@@ -107,3 +107,27 @@ class AccountList:
         # adjust balances based on amount
         payer._element._balance -= amount
         payee._element._balance += amount
+
+    def __get_median_id__(self):
+        # returns the median ID in the list
+
+        if(self.is_empty()):
+            raise Empty('the list is empty')
+
+        elif(self._size == 1):
+            # list of 1 -> median is the head's ID
+            return self._head._uniqueID
+        
+        middle = (int) (self._size / 2)
+        currNode = self._head
+
+        # traverse the list until the middle is reached
+        for x in range(middle-1):
+            currNode = currNode._next
+
+        if(self._size % 2 == 0):
+            # median is the avg of the two middle elements
+            median = (currNode._uniqueID + currNode._next._uniqueID) / 2
+        else:
+            # median is the middle element
+            median = currNode._next._uniqueID
