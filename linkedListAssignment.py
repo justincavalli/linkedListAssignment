@@ -131,3 +131,33 @@ class AccountList:
         else:
             # median is the middle element
             median = currNode._next._uniqueID
+
+    def __merge_accounts__(self, ID1, ID2):
+        # merges two accounts into one, deleting the account with smaller ID
+
+        currNode = self._head
+        firstNode = None
+        secondNode = None
+        
+        # traverse until both nodes are found based on ID
+        while firstNode == None or secondNode == None:
+            # error if you have traversed the entire list, still in the loop
+            if(currNode == None):
+                raise Invalid('ID(s) not found')
+            
+            if(currNode._uniqueID == ID1):
+                firstNode = currNode
+            elif(currNode._uniqueID == ID2):
+                secondNode = currNode
+        
+        if(firstNode._element._name == secondNode._element._name and firstNode._element._address == secondNode._element._address and firstNode._element._socialSecurity == secondNode._element._socialSecurity):
+            # if it is the same person, merge
+            totBalance = firstNode._element._balance + secondNode._element._balance
+            if ID1 > ID2:
+                firstNode._element._balance = totBalance
+                self.__delete_user__(ID2)
+            else:
+                secondNode._element._balance = totBalance
+                self.__delete_user__(ID1)
+        else:
+            raise Invalid('IDs are not the same person')
