@@ -3,13 +3,13 @@ class AccountList:
     
     class _Account:
         # holds all account information
-        __slots__ = '_name', '_address', '_socialSecurity', '_initialDeposit'
+        __slots__ = '_name', '_address', '_socialSecurity', '_balance'
 
         def __init_(self, name, address, socialSecurity, initialDeposit):
             self._name = name
             self._address = address
             self._socialSecurity = socialSecurity
-            self._initialDeposit = initialDeposit
+            self._balance = initialDeposit
 
     class _Node:
         # each node contains an element, ID, and reference to next node
@@ -86,3 +86,24 @@ class AccountList:
         nodeToDelete._next = None
 
         return nodeToDelete._element
+
+    def __pay_user_to_user__(self, payerID, payeeID, amount):
+        # pay 'amount' from one user to another user
+
+        payer = None
+        payee = None
+        currNode = self._head
+
+        # traverse the list to identify payer and payee
+        while payer != None and payee != None:
+            if(currNode._uniqueID == payerID):
+                payer = currNode
+            elif(currNode._uniqueID == payeeID):
+                payee = currNode
+            if(currNode._next == None):
+                raise Invalid('ID(s) does not exist')
+            currNode = currNode._next
+        
+        # adjust balances based on amount
+        payer._element._balance -= amount
+        payee._element._balance += amount
