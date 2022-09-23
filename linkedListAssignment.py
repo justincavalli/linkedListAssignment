@@ -30,6 +30,10 @@ class AccountList:
         # returns the number of elements in the list
         return self._size
 
+    def is_empty(self):
+        # return true if the stack is is_empty
+        return self._size == 0
+    
     def __add_user__(self, name, address, ssn, deposit):
         # adds a new user to the list
 
@@ -60,3 +64,25 @@ class AccountList:
             newNode = self._Node(newAccount, currNode._uniqueID + 1, currNode._next)
             currNode._next = newNode
             self._size += 1
+
+    def __delete_user__(self, ID):
+        # delete the user with the given ID
+
+        if(self.is_empty()):
+            raise Empty('stack is empty')
+
+        # traverse the list to find the Node with the given ID
+        currNode = self._head
+
+        while currNode._next._uniqueID != ID:
+            if(currNode._next._uniqueID > ID):
+                raise Invalid('ID not found')
+            else:
+                currNode = currNode._next
+        
+        # update Node references to delete the given node
+        nodeToDelete = currNode._next
+        currNode._next = nodeToDelete._next
+        nodeToDelete._next = None
+
+        return nodeToDelete._element
