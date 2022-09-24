@@ -40,30 +40,33 @@ class AccountList:
         # create an account for the new user
         newAccount = self._Account(name, address, ssn, deposit)
 
-        if(self._size == 0):
+        if(self.is_empty()):
             # if the list is empty, make head and tail with ID=1
             newNode = self._Node(newAccount, 1, None)
             self._head = newNode
             self._tail = newNode
-            self._size = 1
         elif(self._size == self._tail._uniqueID):
             # if no freed up IDs exist, add to the end of the list
             newNode = self._Node(newAccount, self._size + 1, None)
             self._tail._next = newNode
             self._tail = newNode
-            self._size += 1
+        elif(self._head._uniqueID != 1):
+            # the first ID has been freed up
+            newNode = self._Node(newAccount, 1, self._head)
+            self._head = newNode
         else:
-            # traverse the list to find the first freed up ID
+            # traverse the list to find the gap in ID
             currNode = self._head
 
             while currNode._next._uniqueID == currNode._uniqueID + 1:
-                # traverse until there is a gap in the uniqueID
                 currNode = currNode._next
             
             # insert the new node after currNode
             newNode = self._Node(newAccount, currNode._uniqueID + 1, currNode._next)
             currNode._next = newNode
-            self._size += 1
+        
+        # update the size
+        self._size += 1
 
     def __delete_user__(self, ID):
         # delete the user with the given ID
