@@ -1,3 +1,9 @@
+# Name: Justin Cavalli
+# Date: last edit 9/24/2022
+# Description: This program implements a Linked list of Bank Accounts with functionalities
+#              to add users, delete users, merge users, and pay from one user to another 
+#              as outlined in Assignment 1 of SWE 240.
+
 class AccountList:
     # list of bank accounts
     
