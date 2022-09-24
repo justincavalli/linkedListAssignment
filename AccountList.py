@@ -111,13 +111,14 @@ class AccountList:
         currNode = self._head
 
         # traverse the list to identify payer and payee
-        while payer != None and payee != None:
+        while payer == None or payee == None:
+            if(currNode == None):
+                raise Exception('ID(s) does not exist')
             if(currNode._uniqueID == payerID):
                 payer = currNode
             elif(currNode._uniqueID == payeeID):
                 payee = currNode
-            if(currNode._next == None):
-                raise Exception('ID(s) does not exist')
+            
             currNode = currNode._next
         
         # adjust balances based on amount

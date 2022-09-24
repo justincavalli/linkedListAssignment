@@ -11,9 +11,12 @@ BankOfOC.__delete_user__(3)
 BankOfOC.__add_user__('jermaine', '5057 First St', 723456, 90007)
 BankOfOC.__delete_user__(4)
 BankOfOC.__merge_accounts__(1, 6)
-BankOfOC.__delete_user__(2)
+BankOfOC.__delete_user__(5)
 BankOfOC.__add_user__('Jen', '5051 First St', 123456, 90001)
 BankOfOC.__add_user__('Doug', '5051 First St', 123456, 90001)
+BankOfOC.__add_user__('Doug', '5051 First St', 123456, 90001)
+BankOfOC.__merge_accounts__(4, 5)
+BankOfOC.__pay_user_to_user__(1, 3, 90000)
 
 # debug print
 currNode = BankOfOC._head 
