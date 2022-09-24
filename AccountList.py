@@ -34,7 +34,7 @@ class AccountList:
         # return true if the stack is is_empty
         return self._size == 0
     
-    def __add_user__(self, name, address, ssn, deposit):
+    def add_user(self, name, address, ssn, deposit):
         # adds a new user to the list
 
         # create an account for the new user
@@ -68,7 +68,7 @@ class AccountList:
         # update the size
         self._size += 1
 
-    def __delete_user__(self, ID):
+    def delete_user(self, ID):
         # delete the user with the given ID
 
         if(self.is_empty()):
@@ -103,7 +103,7 @@ class AccountList:
 
         return nodeToDelete._element
 
-    def __pay_user_to_user__(self, payerID, payeeID, amount):
+    def pay_user_to_user(self, payerID, payeeID, amount):
         # pay 'amount' from one user to another user
 
         payer = None
@@ -125,7 +125,7 @@ class AccountList:
         payer._element._balance -= amount
         payee._element._balance += amount
 
-    def __get_median_id__(self):
+    def get_median_id(self):
         # returns the median ID in the list
 
         if(self.is_empty()):
@@ -150,7 +150,7 @@ class AccountList:
             median = currNode._next._uniqueID
         return median
 
-    def __merge_accounts__(self, ID1, ID2):
+    def merge_accounts(self, ID1, ID2):
         # merges two accounts into one, deleting the account with smaller ID
 
         currNode = self._head
@@ -174,9 +174,9 @@ class AccountList:
             totBalance = firstNode._element._balance + secondNode._element._balance
             if ID1 > ID2:
                 firstNode._element._balance = totBalance
-                self.__delete_user__(ID2)
+                self.delete_user(ID2)
             else:
                 secondNode._element._balance = totBalance
-                self.__delete_user__(ID1)
+                self.delete_user(ID1)
         else:
             raise Exception('IDs are not the same person')
